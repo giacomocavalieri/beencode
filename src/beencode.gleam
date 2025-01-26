@@ -117,7 +117,7 @@ pub type BDecodeError {
 /// // -> BList([BInt(1), BString("wibble")])
 ///
 /// decode(<<"d6:wibblei1ee">>)
-/// // -> BDict(dict.from_list([#(BInt(1), BString("wibble"))]))
+/// // -> BDict(dict.from_list([#(BString("wibble"), BInt(1))]))
 /// ```
 ///
 pub fn decode(input: BitArray) -> Result(BValue, BDecodeError) {
@@ -393,7 +393,7 @@ fn decode_dict(
 /// encode(BList([BInt(1), BString("wibble")]))
 /// // -> <<"li1e6:wibblee":utf8>>
 ///
-/// encode(BDict(dict.from_list([#(BInt(1), BString("wibble"))])))
+/// encode(BDict(dict.from_list([#(BString("wibble"), BInt(1))])))
 /// // -> <<"d6:wibblei1ee">>
 /// ```
 ///
