@@ -2,7 +2,6 @@ import gleam/bit_array
 import gleam/dict.{type Dict}
 import gleam/int
 import gleam/list
-import gleam/order.{type Order}
 
 // --- TYPES -------------------------------------------------------------------
 
@@ -418,7 +417,7 @@ pub fn encode(value: BValue) -> BitArray {
         |> list.sort(fn(one, other) {
           let #(one_key, _one_value) = one
           let #(other_key, _other_value) = other
-          bit_array_compare(one_key, other_key)
+          bit_array.compare(one_key, other_key)
         })
         |> list.map(fn(pair) {
           let #(key, value) = pair
@@ -429,6 +428,3 @@ pub fn encode(value: BValue) -> BitArray {
     }
   }
 }
-
-@external(erlang, "beencode_ffi", "compare")
-fn bit_array_compare(one: BitArray, other: BitArray) -> Order
