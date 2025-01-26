@@ -3,7 +3,7 @@ version = "1.0.0"
 
 description = "🐝 bencode in Gleam"
 licences = ["Apache-2.0"]
-repository = { type = "github", user = "giacomocavalieri", repo = "project" }
+repository = { type = "github", user = "giacomocavalieri", repo = "beencode" }
 
 [dependencies]
 gleam_stdlib = ">= 0.50.0 and < 2.0.0"
