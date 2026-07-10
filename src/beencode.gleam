@@ -170,13 +170,13 @@ fn decode_value(
     // We've found a valid number and we can parse it. We just have to be
     // careful about the sign, so if it starts with a `-` we tell `decode_int`
     // that it is a negative number.
-    <<"i-":utf8, rest:bits>> -> decode_int(rest, 0, True, byte_index)
-    <<"i":utf8, rest:bits>> -> decode_int(rest, 0, False, byte_index)
+    <<"i-":utf8, rest:bits>> -> decode_int(rest, 0, True, byte_index + 2)
+    <<"i":utf8, rest:bits>> -> decode_int(rest, 0, False, byte_index + 1)
 
     // --- COMPOSITE STRUCTURES
     //
-    <<"l":utf8, rest:bits>> -> decode_list(rest, [], byte_index)
-    <<"d":utf8, rest:bits>> -> decode_dict(rest, dict.new(), byte_index)
+    <<"l":utf8, rest:bits>> -> decode_list(rest, [], byte_index + 1)
+    <<"d":utf8, rest:bits>> -> decode_dict(rest, dict.new(), byte_index + 1)
 
     // --- STRINGS
     //
@@ -197,7 +197,7 @@ fn decode_value(
     | <<"6":utf8, _:bits>>
     | <<"7":utf8, _:bits>>
     | <<"8":utf8, _:bits>>
-    | <<"9":utf8, _:bits>> -> decode_string(string, 0, byte_index + 1)
+    | <<"9":utf8, _:bits>> -> decode_string(string, 0, byte_index)
 
     // --- FALLBACK ERRORS
     //
